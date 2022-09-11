@@ -102,7 +102,7 @@
   (reset! server
           (server/run-server (make-app html-file-path) {:port port}))
   (let [url (str "http://localhost:" port "/" (fs/file-name html-file-path))]
-    (println "Local server started. See page preview at:")
+    (println "\nLocal server started. See page preview at:")
     (println url)
     (browse/browse-url url)
     (println "\nPress Ctrl+C to stop server")))
