@@ -26,10 +26,6 @@
     (slurp (fs/file example-html-path))))
 
 
-(def example-image-path "/Users/tobiaslocsei/Dropbox/Shared SBI/HGME UYOH/image-files/christmas-greetings-mood-image-800x534.jpg")
-(def example-html-folder "/Users/tobiaslocsei/Dropbox/Shared SBI/HGME UYOH/")
-
-
 (defn list-zz-includes
   "Return a list of zz include file names referenced in a html file"
   [html-string]
@@ -106,9 +102,10 @@
   (reset! server
           (server/run-server (make-app html-file-path) {:port port}))
   (let [url (str "http://localhost:" port "/" (fs/file-name html-file-path))]
-    (println "See page preview at:")
+    (println "Local server started. See page preview at:")
     (println url)
-    (browse/browse-url url)))
+    (browse/browse-url url)
+    (println "\nPress Ctrl+C to stop server")))
 (comment
   (start-server {:html-file-path example-html-path
                  :port 3002})
@@ -119,6 +116,7 @@
   [{:keys [html port]}]
   (start-server {:html-file-path html
                  :port port})
+  ; Use @(promise) to stop script exiting
   @(promise))
 
 
